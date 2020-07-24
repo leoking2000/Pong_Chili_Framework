@@ -45,6 +45,7 @@ void Game::UpdateModel()
 
 	// for ai vs ai
 	//AI_move(paddle);
+	// the ai is Too good
 	AI_move(AIpaddle);
 
 	if(wnd.kbd.KeyIsPressed(VK_SPACE) && ball_active == false) 
