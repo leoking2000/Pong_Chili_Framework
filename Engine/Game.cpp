@@ -99,7 +99,8 @@ void Game::AI_move(Box& p)
 
 void Game::ComposeFrame()
 {
-	ball.draw(gfx, 255, 255, 255);
+	//ball.draw(gfx, 255, 255, 255);
+	gfx.DrawCircle(ball.getX(), ball.getY(), 5, Colors::White);
 	paddle.draw(gfx, 255, 255, 255);
 	AIpaddle.draw(gfx, 255, 255, 255);
 }

@@ -56,6 +56,24 @@ public:
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
 	void PutPixel( int x,int y,Color c );
+	void DrawCircle(int xPos, int yPos, int r, Color c) 
+	{
+		xPos =  xPos + (ScreenWidth / 2);
+		yPos = -yPos + (ScreenHeight / 2);
+
+		for (int y = yPos - r; y < yPos + r; y++)
+		{
+			for (int x = xPos - r; x < xPos + r; x++) 
+			{
+				// if the distance from the center is less or eq to r then draw
+				if ((xPos - x) * (xPos - x) + (yPos - y) * (yPos - y) < r * r) 
+				{
+					PutPixel(x, y, c);
+				}
+			}
+		}
+
+	}
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;

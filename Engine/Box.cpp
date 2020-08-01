@@ -78,7 +78,7 @@ void Box::setVelocity(int xvel, int yvel)
 
 void Box::draw(Graphics& gfx, int r, int g, int b) const
 {
-	int posX = x + (gfx.ScreenWidth / 2);
+	int posX =  x + (gfx.ScreenWidth / 2);
 	int posY = -y + (gfx.ScreenHeight / 2);
 
 	for (int i = posX - width; i <= posX + width; i++) {
