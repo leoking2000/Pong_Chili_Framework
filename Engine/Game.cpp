@@ -40,8 +40,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.kbd.KeyIsPressed(VK_UP))   { paddle.translate(0,  7);   }
-	if (wnd.kbd.KeyIsPressed(VK_DOWN)) { paddle.translate(0, -7);   }
+	const float deltaTime = ft.Mark();
+
+	if (wnd.kbd.KeyIsPressed(VK_UP))   { paddle.translate(0,  7 * deltaTime);   }
+	if (wnd.kbd.KeyIsPressed(VK_DOWN)) { paddle.translate(0, -7 * deltaTime);   }
 
 	// for ai vs ai
 	//AI_move(paddle);
