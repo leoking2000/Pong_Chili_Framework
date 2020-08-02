@@ -5,35 +5,35 @@
 class Box
 {
 private:
-	int x;
-	int y;
-	int width;
-	int height;
-	int speedX = 0;
-	int speedY = 0;
+	float x;
+	float y;
+	int   width;
+	int   height;
+	float speedX = 0.0f;
+	float speedY = 0.0f;
 
 	void ClampPositionToScreen();
 public:
-	Box(int x, int y, int boxWidth, int boxHeight);
-	Box(int x, int y,int vX, int vY, int boxWidth, int boxHeight);
+	Box(float x, float y, int boxWidth, int boxHeight);
+	Box(float x, float y, float vX, float vY, int boxWidth, int boxHeight);
 
 	bool isIntersecting(const Box& box) const;
 	void draw(Graphics& gfx, int r, int g, int b) const;
 
-	void update();
-	void translate(int dx, int dy);
-	void setPosition(int xpos, int ypos);
-	void setVelocity(int xvel, int yvel);
+	void update(float deltaTime);
+	void translate(float dx, float dy);
+	void setPosition(float xpos, float ypos);
+	void setVelocity(float xvel, float yvel);
 
 	// getter
-	int getX() const { return x; }
-	int getY() const { return y; }
+	float getX() const { return x; }
+	float getY() const { return y; }
 
 	int getWidth() const { return width; }
 	int getHeigth() const { return height; }
 
-	int getVelocityX() const { return speedX; }
-	int getVelocityY() const { return speedY; }
+	float getVelocityX() const { return speedX; }
+	float getVelocityY() const { return speedY; }
 	
 
 };

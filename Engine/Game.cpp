@@ -42,23 +42,23 @@ void Game::UpdateModel()
 {
 	const float deltaTime = ft.Mark();
 
-	if (wnd.kbd.KeyIsPressed(VK_UP))   { paddle.translate(0,  7 * deltaTime);   }
-	if (wnd.kbd.KeyIsPressed(VK_DOWN)) { paddle.translate(0, -7 * deltaTime);   }
+	if (wnd.kbd.KeyIsPressed(VK_UP))   { paddle.translate(0,  420.0f * deltaTime);   }
+	if (wnd.kbd.KeyIsPressed(VK_DOWN)) { paddle.translate(0, -420.0f * deltaTime);   }
 
 	// for ai vs ai
 	//AI_move(paddle);
 	// the ai is Too good
-	AI_move(AIpaddle);
+	AI_move(AIpaddle, deltaTime);
 
 	if(wnd.kbd.KeyIsPressed(VK_SPACE) && ball_active == false) 
 	{ 
 		ball_active = true;
-		ball.setVelocity( 5, -5);
+		ball.setVelocity( 300.0f, -300.0f);
 	}
 
 	if (ball_active) 
 	{ 
-		ball.update();
+		ball.update(deltaTime);
 		if ((ball.isIntersecting(paddle) || ball.isIntersecting(AIpaddle)))
 		{
 			if (CollisionBuffer == false)
@@ -84,17 +84,17 @@ void Game::UpdateModel()
 void Game::resetBall()
 {
 	ball_active = false;
-	ball.setPosition(0, 0);
-	ball.setVelocity(0, 0);
+	ball.setPosition(0.0f, 0.0f);
+	ball.setVelocity(0.0f, 0.0f);
 }
 
-void Game::AI_move(Box& p)
+void Game::AI_move(Box& p, float deltaTime)
 {
 	if (ball.getY() > p.getY() + p.getWidth() / 2) {
-		p.translate(0, 5);
+		p.translate(0.0f, 300.0f * deltaTime);
 	}
 	if (ball.getY() < p.getY() - p.getWidth() / 2) {
-		p.translate(0, -5);
+		p.translate(0.0f, -300.0f * deltaTime);
 	}
 
 }
@@ -102,7 +102,7 @@ void Game::AI_move(Box& p)
 void Game::ComposeFrame()
 {
 	//ball.draw(gfx, 255, 255, 255);
-	gfx.DrawCircle(ball.getX(), ball.getY(), 5, Colors::White);
+	gfx.DrawCircle(int(ball.getX()), int(ball.getY()), 5, Colors::White);
 	paddle.draw(gfx, 255, 255, 255);
 	AIpaddle.draw(gfx, 255, 255, 255);
 }
