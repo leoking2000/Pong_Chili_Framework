@@ -51,6 +51,6 @@ private:
 	Box paddle{ -330, 0, 3, 25 };
 	Box AIpaddle{ 330, 0, 3, 25 };
 
-	bool CollisionBaffer = false;
+	bool CollisionBuffer = false;
 	/********************************/
 };

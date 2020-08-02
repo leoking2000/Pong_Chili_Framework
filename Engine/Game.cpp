@@ -59,15 +59,15 @@ void Game::UpdateModel()
 		ball.update();
 		if ((ball.isIntersecting(paddle) || ball.isIntersecting(AIpaddle)))
 		{
-			if (CollisionBaffer == false)
+			if (CollisionBuffer == false)
 			{
 				ball.setVelocity(-ball.getVelocityX(), ball.getVelocityY());
-				CollisionBaffer = true;
+				CollisionBuffer = true;
 			}
 		}
 		else
 		{
-			CollisionBaffer = false;
+			CollisionBuffer = false;
 		}
 
 		if (ball.getX() - ball.getWidth() <= -(gfx.ScreenWidth / 2) + 5  || 
