@@ -26,6 +26,8 @@
 #include <string>
 #include <array>
 
+#include <algorithm>
+
 // Ignore the intellisense error "cannot open source file" for .shh files.
 // They will be created during the build sequence before the preprocessor runs.
 namespace FramebufferShaders
@@ -314,6 +316,59 @@ void Graphics::PutPixel( int x,int y,Color c )
 	assert( y >= 0 );
 	assert( y < int( Graphics::ScreenHeight ) );
 	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
+}
+
+void Graphics::DrawCircle(int xPos, int yPos, int r, Color c)
+{
+	xPos = xPos + (ScreenWidth / 2);
+	yPos = -yPos + (ScreenHeight / 2);
+
+	for (int y = yPos - r; y < yPos + r; y++)
+	{
+		for (int x = xPos - r; x < xPos + r; x++)
+		{
+			// if the distance from the center is less or eq to r then draw
+			if ((xPos - x) * (xPos - x) + (yPos - y) * (yPos - y) < r * r)
+			{
+				PutPixel(x, y, c);
+			}
+		}
+	}
+
+}
+
+void Graphics::DrawLine(int x0, int y0, int x1, int y1, Color c)
+{
+	// horizontal?
+	if (y0 == y1) {
+		if (x0 > x1) std::swap(x0, x1);
+		for (int i = x0; i <= x1; i++)
+		{
+			PutPixel(i, y0, c);
+		}
+		return;
+	}
+	// vertical?
+	if (x0 == x1) {
+		if (y0 > y1) std::swap(y0, y1);
+		for (int i = y0; i <= y1; i++)
+		{
+			PutPixel(x0, i, c);
+		}
+		return;
+	}
+
+	if (x0 > x1) { std::swap(x0, x1); std::swap(y0, y1); }
+
+	const float m = (float(y1) - float(y0)) / (float(x1) - float(x0));
+	const float b = float(y0) - m * float(x0);
+
+	for (int x = x0; x < x1; x++)
+	{
+		float y = m * float(x) + b;
+		PutPixel(x, int(y), c);
+	}
+
 }
 
 
