@@ -42,8 +42,8 @@ void Game::UpdateModel()
 {
 	const float deltaTime = ft.Mark();
 
-	if (wnd.kbd.KeyIsPressed(VK_UP))   { paddle.translate(0,  420.0f * deltaTime);   }
-	if (wnd.kbd.KeyIsPressed(VK_DOWN)) { paddle.translate(0, -420.0f * deltaTime);   }
+	if (wnd.kbd.KeyIsPressed(VK_UP))   { paddle.translate(  paddleMoveVec *  deltaTime);   }
+	if (wnd.kbd.KeyIsPressed(VK_DOWN)) { paddle.translate(  paddleMoveVec * -deltaTime);   }
 
 	// for ai vs ai
 	//AI_move(paddle);
@@ -53,7 +53,7 @@ void Game::UpdateModel()
 	if(wnd.kbd.KeyIsPressed(VK_SPACE) && ball_active == false) 
 	{ 
 		ball_active = true;
-		ball.setVelocity( 300.0f, -300.0f);
+		ball.setVelocity({ 300.0f, -300.0f });
 	}
 
 	if (ball_active) 
@@ -63,7 +63,7 @@ void Game::UpdateModel()
 		{
 			if (CollisionBuffer == false)
 			{
-				ball.setVelocity(-ball.getVelocityX(), ball.getVelocityY());
+				ball.setVelocity({ -ball.getVelocityX(), ball.getVelocityY() });
 				CollisionBuffer = true;
 			}
 		}
@@ -84,17 +84,17 @@ void Game::UpdateModel()
 void Game::resetBall()
 {
 	ball_active = false;
-	ball.setPosition(0.0f, 0.0f);
-	ball.setVelocity(0.0f, 0.0f);
+	ball.setPosition({ 0.0f, 0.0f });
+	ball.setVelocity({ 0.0f, 0.0f });
 }
 
 void Game::AI_move(Box& p, float deltaTime)
 {
 	if (ball.getY() > p.getY() + p.getWidth() / 2) {
-		p.translate(0.0f, 300.0f * deltaTime);
+		p.translate(AIMoveVec * deltaTime);
 	}
 	if (ball.getY() < p.getY() - p.getWidth() / 2) {
-		p.translate(0.0f, -300.0f * deltaTime);
+		p.translate(AIMoveVec * -deltaTime);
 	}
 
 }

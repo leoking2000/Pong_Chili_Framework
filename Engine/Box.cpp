@@ -2,85 +2,85 @@
 #include "Graphics.h"
 
 
-Box::Box(float xPos, float yPos, int boxWidth, int boxHeight)
+Box::Box(const Vector2& p, int boxWidth, int boxHeight)
+	:
+	pos(p)
 {
-	x = xPos;
-	y = yPos;
 	width = boxWidth;
 	height = boxHeight;
 }
 
-Box::Box(float x, float y, float vX, float vY, int boxWidth, int boxHeight)
+Box::Box(const Vector2& p, const Vector2& v, int boxWidth, int boxHeight)
+	:
+	vel(v)
 {
-	Box(x, y, boxWidth, boxHeight);
-	speedX = vX;
-	speedY = vY;
+	Box(p, boxWidth, boxHeight);
 }
 
 bool Box::isIntersecting(const Box& box) const
 {
-	return x + width  >= box.x - box.width &&
-		   x - width  <= box.x + box.width &&
-		   y - height <= box.y + box.height &&
-		   y + height >= box.y - box.height;
+	return pos.x + width  >= box.pos.x - box.width &&
+		   pos.x - width  <= box.pos.x + box.width &&
+		   pos.y - height <= box.pos.y + box.height &&
+		   pos.y + height >= box.pos.y - box.height;
 
 }
 
 void Box::update(float deltaTime)
 {
-	x += speedX * deltaTime; 
-	y += speedY * deltaTime;
+	pos += vel * deltaTime;
 
 	// right wall
-	if (x + width >= Graphics::ScreenWidth / 2) {
-		speedX = -speedX;
+	if (pos.x + width >= Graphics::ScreenWidth / 2) {
+		vel.x = -vel.x;
 	}
 	// left wall
-	if (x - width <= -Graphics::ScreenWidth / 2) {
-		speedX = -speedX;
+	if (pos.x - width <= -Graphics::ScreenWidth / 2) {
+		vel.x = -vel.x;
 	}
 	// top wall
-	if (y + height >= Graphics::ScreenHeight / 2) {
-		speedY = -speedY;
+	if (pos.y + height >= Graphics::ScreenHeight / 2) {
+		vel.y = -vel.y;
 	}
-	if (y - height <= -Graphics::ScreenHeight / 2) {
-		speedY = -speedY;
+	//bottom
+	if (pos.y - height <= -Graphics::ScreenHeight / 2) {
+		vel.y = -vel.y;
 	}
 
 	ClampPositionToScreen();
 }
 
-void Box::translate(float dx, float dy)
+void Box::translate(const Vector2& delta)
 {
-	x += dx; y += dy;
+	pos += delta;
 
 	ClampPositionToScreen();
 }
 
 void Box::ClampPositionToScreen()
 {
-	if (x + width >= Graphics::ScreenWidth / 2)    { x = float( (Graphics::ScreenWidth / 2)   - (width  + 1) );  }
-	if (x - width <= -Graphics::ScreenWidth / 2)   { x = float( (-Graphics::ScreenWidth / 2)  + (width  + 1) );  }
-	if (y + height >= Graphics::ScreenHeight / 2)  { y = float( (Graphics::ScreenHeight / 2)  - (height + 1) );  }
-	if (y - height <= -Graphics::ScreenHeight / 2) { y = float( (-Graphics::ScreenHeight / 2) + (height + 1) );  }
+	if (pos.x + width >= Graphics::ScreenWidth / 2)    { pos.x = float( (Graphics::ScreenWidth / 2)   - (width  + 1) );  }
+	if (pos.x - width <= -Graphics::ScreenWidth / 2)   { pos.x = float( (-Graphics::ScreenWidth / 2)  + (width  + 1) );  }
+	if (pos.y + height >= Graphics::ScreenHeight / 2)  { pos.y = float( (Graphics::ScreenHeight / 2)  - (height + 1) );  }
+	if (pos.y - height <= -Graphics::ScreenHeight / 2) { pos.y = float( (-Graphics::ScreenHeight / 2) + (height + 1) );  }
 }
 
-void Box::setPosition(float xpos, float ypos)
+void Box::setPosition(const Vector2& newPos)
 {
-	x = xpos; y = ypos;
+	pos = newPos;
 	ClampPositionToScreen();
 }
 
-void Box::setVelocity(float xvel, float yvel)
+void Box::setVelocity(const Vector2& newVel)
 {
-	speedX = xvel; speedY = yvel;
+	vel = newVel;
 }
 
 
 void Box::draw(Graphics& gfx, int r, int g, int b) const
 {
-	int posX =  int(x) + (gfx.ScreenWidth / 2);
-	int posY = -int(y) + (gfx.ScreenHeight / 2);
+	int posX =  int(pos.x) + (gfx.ScreenWidth / 2);
+	int posY = -int(pos.y) + (gfx.ScreenHeight / 2);
 
 	for (int i = posX - width; i <= posX + width; i++) {
 		for (int j = posY - height; j <= posY + height; j++) {

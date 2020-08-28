@@ -47,11 +47,14 @@ private:
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;
-	Box ball{ 0.0f, 0.0f , 5, 5 };
+	Box ball{ {0.0f, 0.0f} , 5, 5 };
 	bool ball_active = false;
 
-	Box paddle{ -330.0f, 0.0f, 3, 25 };
-	Box AIpaddle{ 330.0f, 0.0f, 3, 25 };
+	Box paddle{ {-330.0f, 0.0f}, 3, 25 };
+	Box AIpaddle{ {330.0f, 0.0f}, 3, 25 };
+
+	const Vector2 paddleMoveVec{ 0, 420.0f };
+	const Vector2 AIMoveVec{ 0, 300.0f };
 
 	bool CollisionBuffer = false;
 	/********************************/

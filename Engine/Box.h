@@ -1,39 +1,38 @@
 #pragma once
 
 #include "Graphics.h"
+#include "Vector2.h"
 
 class Box
 {
 private:
-	float x;
-	float y;
+	Vector2 pos{ 0.0f, 0.0f };
 	int   width;
 	int   height;
-	float speedX = 0.0f;
-	float speedY = 0.0f;
+	Vector2 vel{ 0.0f, 0.0f };
 
 	void ClampPositionToScreen();
 public:
-	Box(float x, float y, int boxWidth, int boxHeight);
-	Box(float x, float y, float vX, float vY, int boxWidth, int boxHeight);
+	Box(const Vector2& p , int boxWidth, int boxHeight);
+	Box(const Vector2& p, const Vector2& v, int boxWidth, int boxHeight);
 
 	bool isIntersecting(const Box& box) const;
 	void draw(Graphics& gfx, int r, int g, int b) const;
 
 	void update(float deltaTime);
-	void translate(float dx, float dy);
-	void setPosition(float xpos, float ypos);
-	void setVelocity(float xvel, float yvel);
+	void translate(const Vector2& delta);
+	void setPosition(const Vector2& newPos);
+	void setVelocity(const Vector2& newVel);
 
 	// getter
-	float getX() const { return x; }
-	float getY() const { return y; }
+	float getX() const { return pos.x; }
+	float getY() const { return pos.y; }
 
 	int getWidth() const { return width; }
 	int getHeigth() const { return height; }
 
-	float getVelocityX() const { return speedX; }
-	float getVelocityY() const { return speedY; }
+	float getVelocityX() const { return vel.x; }
+	float getVelocityY() const { return vel.y; }
 	
 
 };
