@@ -320,9 +320,9 @@ void Graphics::PutPixel( int x,int y,Color c )
 
 void Graphics::DrawRect(int x, int y, int width, int height, Color c)
 {
-	for (int i = x; i < width; i++)
+	for (int i = x; i < width + x; i++)
 	{
-		for (int j = y; j < height; j++)
+		for (int j = y; j < height + y; j++)
 		{
 			PutPixel(i, j, c);
 		}
