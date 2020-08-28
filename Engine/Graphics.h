@@ -56,6 +56,7 @@ public:
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
 	void PutPixel( int x,int y,Color c );
+	void DrawRect(int x, int y, int width, int height, Color c);
 	void DrawCircle(int xPos, int yPos, int r, Color c);
 	void DrawLine(int x0, int y0, int x1, int x2, Color c);
 	~Graphics();
