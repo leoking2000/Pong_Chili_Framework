@@ -331,9 +331,6 @@ void Graphics::DrawRect(int x, int y, int width, int height, Color c)
 
 void Graphics::DrawCircle(int xPos, int yPos, int r, Color c)
 {
-	xPos = xPos + (ScreenWidth / 2);
-	yPos = -yPos + (ScreenHeight / 2);
-
 	for (int y = yPos - r; y < yPos + r; y++)
 	{
 		for (int x = xPos - r; x < xPos + r; x++)
