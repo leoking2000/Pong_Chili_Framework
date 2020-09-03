@@ -17,6 +17,11 @@ Vector2 Vector2::operator+(const Vector2& vec) const
 	return Vector2(x + vec.x , y + vec.y);
 }
 
+Vector2 Vector2::operator+(int num) const
+{
+	return Vector2(x + num, y + num);
+}
+
 Vector2& Vector2::operator+=(const Vector2& vec)
 {
 	*this = *this + vec;
@@ -26,6 +31,11 @@ Vector2& Vector2::operator+=(const Vector2& vec)
 Vector2 Vector2::operator-(const Vector2& vec) const
 {
 	return Vector2(x - vec.x, y - vec.y);
+}
+
+Vector2 Vector2::operator-(int num) const
+{
+	return Vector2(x - num, y - num);
 }
 
 Vector2& Vector2::operator-=(const Vector2& vec)

@@ -13,8 +13,10 @@ public:
 	bool operator==(const Vector2& vec) const;
 
 	Vector2 operator+(const Vector2& vec) const;
+	Vector2 operator+(int num) const;
 	Vector2& operator+=(const Vector2& vec);
 	Vector2 operator-(const Vector2& vec) const;
+	Vector2 operator-(int num) const;
 	Vector2& operator-=(const Vector2& vec);
 	Vector2 operator*(float scaler) const;
 	Vector2& operator*=(float scaler);
