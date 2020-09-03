@@ -46,9 +46,9 @@ private:
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;
-	Paddle playerPaddle{ {30, 275}, 10, 50 };
-	Paddle AIPaddle{ {770, 275}, 10, 50 };
-	Ball ball{ {400, 300}, 2};
+	Paddle playerPaddle{ {30, 275}, 7, 50 };
+	Paddle AIPaddle{ {770, 275}, 7, 50 };
+	Ball ball{ {400, 300}, 5};
 
 	/********************************/
 };
