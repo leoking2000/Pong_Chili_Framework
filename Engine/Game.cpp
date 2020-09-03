@@ -44,4 +44,8 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	playerPaddle.Draw(gfx);
+	AIPaddle.Draw(gfx);
+	ball.Draw(gfx);
+
 }
