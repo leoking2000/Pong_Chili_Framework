@@ -27,6 +27,11 @@ void Rect::Translate(const Vector2& delta)
 	ClampPositionToScreen();
 }
 
+Vector2 Rect::GetCenter()
+{
+	return Vector2(topLeft.x + width/2, topLeft.y + height/2);
+}
+
 void Rect::ClampPositionToScreen()
 {
 	if (topLeft.x <= 0) { topLeft.x = 0.0f; }
