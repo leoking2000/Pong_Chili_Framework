@@ -20,7 +20,7 @@ public:
 	void Translate(const Vector2& delta);
 
 	// getters
-	Vector2 GetCenter();
+	Vector2 GetCenter() const;
 
 };
 

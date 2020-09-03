@@ -27,7 +27,7 @@ void Rect::Translate(const Vector2& delta)
 	ClampPositionToScreen();
 }
 
-Vector2 Rect::GetCenter()
+Vector2 Rect::GetCenter() const
 {
 	return Vector2(topLeft.x + width/2, topLeft.y + height/2);
 }
